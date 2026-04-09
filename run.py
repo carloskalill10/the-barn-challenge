@@ -91,17 +91,16 @@ if __name__ == "__main__":
 
 
 
-
     ##########################################################################################
     ## 1. Launch your navigation stack
     ## (Customize this block to add your own navigation stack)
     ##########################################################################################
     
-    launch_file = join(base_path, '..', 'jackal_helper/launch/move_base_FSMT.launch')
-    nav_stack_process = subprocess.Popen([
-        'roslaunch',
-        launch_file,
-    ])
+    # launch_file = join(base_path, '..', 'jackal_helper/launch/move_base_FSMT.launch')
+    # nav_stack_process = subprocess.Popen([
+    #     'roslaunch',
+    #     launch_file,
+    # ])
     
     # Make sure your navigation stack recives the correct goal position defined in GOAL_POSITION
     import actionlib
@@ -111,13 +110,13 @@ if __name__ == "__main__":
     nav_as_teb = actionlib.SimpleActionClient('/teb/move_base', MoveBaseAction)
     mb_goal = MoveBaseGoal()
     mb_goal.target_pose.header.frame_id = 'odom'
-    mb_goal.target_pose.pose.position.x = GOAL_POSITION[0]
-    mb_goal.target_pose.pose.position.y = GOAL_POSITION[1]
+    mb_goal.target_pose.pose.position.x =  GOAL_POSITION[0] + 0.1
+    mb_goal.target_pose.pose.position.y =  GOAL_POSITION[1] + 0.1
     mb_goal.target_pose.pose.position.z = 0
     mb_goal.target_pose.pose.orientation = Quaternion(0, 0, 0, 1)
 
-    nav_as_fsmt.wait_for_server()
-    nav_as_fsmt.send_goal(mb_goal)
+    # nav_as_fsmt.wait_for_server()
+    # nav_as_fsmt.send_goal(mb_goal)
 
     nav_as_teb.wait_for_server()
     nav_as_teb.send_goal(mb_goal)
@@ -146,13 +145,13 @@ if __name__ == "__main__":
     start_time = curr_time
     start_time_cpu = time.time()
     collided = False
-    
+
     while compute_distance(goal_coor, curr_coor) > 1 and not collided and curr_time - start_time < 100:
         curr_time = rospy.get_time()
         pos = gazebo_sim.get_model_state().pose.position
         curr_coor = (pos.x, pos.y)
         print("Time: %.2f (s), x: %.2f (m), y: %.2f (m)" %(curr_time - start_time, *curr_coor), end="\r")
-
+        # print("distance: ", compute_distance(goal_coor, curr_coor))
         collided = gazebo_sim.get_hard_collision()
         while rospy.get_time() - curr_time < 0.1:
             time.sleep(0.01)
