@@ -153,12 +153,6 @@ if __name__ == "__main__":
         curr_coor = (pos.x, pos.y)
         print("Time: %.2f (s), x: %.2f (m), y: %.2f (m)" %(curr_time - start_time, *curr_coor), end="\r")
 
-        if nav_as_teb.get_state() == actionlib.GoalStatus.ABORTED:
-            nav_as_teb.send_goal(mb_goal)
-            
-        if nav_as_fsmt.get_state() == actionlib.GoalStatus.ABORTED:
-            nav_as_fsmt.send_goal(mb_goal)
-
         collided = gazebo_sim.get_hard_collision()
         while rospy.get_time() - curr_time < 0.1:
             time.sleep(0.01)

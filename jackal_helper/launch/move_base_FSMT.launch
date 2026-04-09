@@ -20,6 +20,5 @@
     <remap from="cmd_vel" to="cmd_vel" />
     <remap from="front/scan" to="/front/scan" />
 
- 
   </node>
 </launch>
