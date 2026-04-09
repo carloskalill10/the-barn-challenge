@@ -95,12 +95,30 @@ if __name__ == "__main__":
     ## 1. Launch your navigation stack
     ## (Customize this block to add your own navigation stack)
     ##########################################################################################
-    
-    # launch_file = join(base_path, '..', 'jackal_helper/launch/move_base_FSMT.launch')
-    # nav_stack_process = subprocess.Popen([
-    #     'roslaunch',
-    #     launch_file,
-    # ])
+ 
+    launch_file = join(base_path, '../..', 'mux_detector/launch/mux_detector.launch')
+    nav_stack_process = subprocess.Popen([
+        'roslaunch',
+        launch_file,
+    ])
+
+    launch_file = join(base_path, '../..', 'dynamic_obstacles_detector/launch/exec_dynamic_obst_detector.launch')
+    nav_stack_process = subprocess.Popen([
+        'roslaunch',
+        launch_file,
+    ])
+
+    launch_file = join(base_path, '../..', 'jackal_barn_navigation/launch/teb_move_base.launch')
+    nav_stack_process = subprocess.Popen([
+        'roslaunch',
+        launch_file,
+    ])
+
+    launch_file = join(base_path, '..', 'jackal_helper/launch/move_base_FSMT.launch')
+    nav_stack_process = subprocess.Popen([
+        'roslaunch',
+        launch_file,
+    ])
     
     # Make sure your navigation stack recives the correct goal position defined in GOAL_POSITION
     import actionlib
@@ -115,8 +133,8 @@ if __name__ == "__main__":
     mb_goal.target_pose.pose.position.z = 0
     mb_goal.target_pose.pose.orientation = Quaternion(0, 0, 0, 1)
 
-    # nav_as_fsmt.wait_for_server()
-    # nav_as_fsmt.send_goal(mb_goal)
+    nav_as_fsmt.wait_for_server()
+    nav_as_fsmt.send_goal(mb_goal)
 
     nav_as_teb.wait_for_server()
     nav_as_teb.send_goal(mb_goal)
