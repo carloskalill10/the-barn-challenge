@@ -18,7 +18,7 @@ From: ros:melodic
     git clone https://github.com/jackal/jackal.git --branch melodic-devel
     git clone https://github.com/jackal/jackal_simulator.git --branch melodic-devel
     git clone https://github.com/jackal/jackal_desktop.git --branch melodic-devel
-    git clone https://github.com/romulortr/fsmt_ros.git
+    git clone https://github.com/romulortr/fsmt_ros.git --branch barn2025
     git clone https://github.com/carloskalill10/mux_detector.git
     git clone https://github.com/carloskalill10/dynamic_obstacles_detector.git
     git clone https://github.com/carloskalill10/jackal_barn_navigation.git
